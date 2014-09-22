@@ -17,6 +17,7 @@ public class Gui extends JFrame{
 	JLabel messages;
 	JTextField inputMessage;
 	JButton sendMessage;
+	JButton settings;
 	
 	
 	public Gui (){
@@ -33,12 +34,16 @@ public class Gui extends JFrame{
 		sendMessage = new JButton("Senden");
 		sendMessage.addActionListener(new ButtonListener());
 		
+		settings = new JButton("Config");
+		settings.addActionListener(new ButtonListener());
+		
 		//END: Gui-Components
 		
 		//START: Adding Components to GUI 
 		add(messages);
 		add(inputMessage);
 		add(sendMessage);
+		add(settings);
 		//END: Adding Components to GUI 
 		
 		setLayout(new FlowLayout());
@@ -55,6 +60,10 @@ public class Gui extends JFrame{
 				System.out.println("You send a message!");
 			}
 			
+			if(e.getSource() == settings){
+				System.out.println("Settings");
+				JFrame se = new Settings();
+			}
 		}
 		
 	}
