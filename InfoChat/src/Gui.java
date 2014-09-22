@@ -60,7 +60,7 @@ public class Gui extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == sendMessage){
 				Message.send(inputMessage.getText());
-				messages.setText(messages.getText() + "\r\n" + inputMessage.getText());
+				messages.setText("<html><body>" + messages.getText() + "<br>" + inputMessage.getText() + "</body></html>");
 			}
 			
 			if(e.getSource() == settings){
