@@ -59,7 +59,8 @@ public class Gui extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == sendMessage){
-				System.out.println("You send a message!");
+				Message.send(inputMessage.getText());
+				messages.setText(messages.getText() + "\r\n" + inputMessage.getText());
 			}
 			
 			if(e.getSource() == settings){

@@ -47,7 +47,6 @@ public class Settings extends JFrame{
 		//END: Adding Components to GUI 
 		
 		setLayout(new FlowLayout());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
 	}
