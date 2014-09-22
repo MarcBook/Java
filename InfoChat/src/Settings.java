@@ -37,11 +37,11 @@ public class Settings extends JFrame{
 		//END: Gui-Components
 		
 		//START: Adding Components to GUI 
-				add(ip);
-				add(inputip);
-				add(port);
-				add(inputport);
-				add(saveSettings);
+		add(ip);
+		add(inputip);
+		add(port);
+		add(inputport);
+		add(saveSettings);
 		//END: Adding Components to GUI 
 		
 		setLayout(new FlowLayout());
