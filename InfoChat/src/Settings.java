@@ -1,4 +1,6 @@
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,9 @@ public class Settings extends JFrame{
 	
 	JLabel port;
 	JTextField inputport;
+	
+	JLabel username;
+	JTextField inputusername;
 	
 	JButton saveSettings;
 	
@@ -32,6 +37,11 @@ public class Settings extends JFrame{
 		inputport = new JTextField("4521");
 		inputport.setColumns(15);
 		
+		username = new JLabel("Name:");
+		
+		inputusername = new JTextField("User");
+		inputusername.setColumns(15);
+		
 		saveSettings = new JButton("Speichern");
 		
 		//END: Gui-Components
@@ -42,6 +52,8 @@ public class Settings extends JFrame{
 		add(inputip);
 		add(port);
 		add(inputport);
+		add(username);
+		add(inputusername);
 		add(saveSettings);
 		
 		//END: Adding Components to GUI 
@@ -49,5 +61,14 @@ public class Settings extends JFrame{
 		setLayout(new FlowLayout());
 		setResizable(false);
 		setVisible(true);
+	}
+	
+	public class ButtonHeandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 }
