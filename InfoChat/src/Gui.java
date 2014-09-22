@@ -68,7 +68,6 @@ public class Gui extends JFrame{
 				JFrame se = new Settings();
 			}
 		}
-		
 	}
 }
 
