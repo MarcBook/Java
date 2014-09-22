@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 
 
-public class Main {
+public class Client {
 	public static void main(String[] args) {
 		JFrame jf = new Gui();
 	}

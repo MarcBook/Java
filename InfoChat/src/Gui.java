@@ -9,12 +9,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
 public class Gui extends JFrame{
 	
-	JLabel messages;
+	JLabel ip;
+	JTextField inputip;
+	
+	JLabel port;
+	JTextField inputport;
+	
+	JTextArea messages;
 	JTextField inputMessage;
 	JButton sendMessage;
 	JButton settings;
@@ -26,7 +33,19 @@ public class Gui extends JFrame{
 		
 		//START: Gui-Components
 		
-		messages = new JLabel("Keine Nachrichten verfügbar");
+		ip = new JLabel("IP-Adresse:");
+		
+		inputip = new JTextField("localhost");
+		inputip.setColumns(15);
+		
+		port = new JLabel("Port:");
+		
+		inputport = new JTextField("5555");
+		inputport.setColumns(15);
+		
+		messages = new JTextArea("Keine Nachrichten verfügbar");
+		messages.setColumns(15);
+		messages.setEditable(false);
 		
 		inputMessage = new JTextField();
 		inputMessage.setColumns(15);
@@ -41,10 +60,14 @@ public class Gui extends JFrame{
 		
 		//START: Adding Components to GUI 
 		
+		add(ip);
+		add(inputip);
+		add(port);
+		add(inputport);
 		add(messages);
 		add(inputMessage);
 		add(sendMessage);
-		add(settings);
+		//add(settings);
 		
 		//END: Adding Components to GUI 
 		
@@ -59,8 +82,11 @@ public class Gui extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == sendMessage){
-				Message.send(inputMessage.getText());
-				messages.setText("<html><body>" + messages.getText() + "<br /><br />" + inputMessage.getText() + "</body></html>");
+				
+				int port = Integer.parseInt(inputport.getText());
+				
+				Message.send(inputMessage.getText(), inputip.getText(), port);
+				messages.setText(messages.getText() + inputMessage.getText());
 			}
 			
 			if(e.getSource() == settings){
