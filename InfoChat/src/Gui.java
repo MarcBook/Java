@@ -40,10 +40,12 @@ public class Gui extends JFrame{
 		//END: Gui-Components
 		
 		//START: Adding Components to GUI 
+		
 		add(messages);
 		add(inputMessage);
 		add(sendMessage);
 		add(settings);
+		
 		//END: Adding Components to GUI 
 		
 		setLayout(new FlowLayout());
