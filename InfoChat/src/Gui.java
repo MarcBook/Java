@@ -3,6 +3,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,18 +13,25 @@ import javax.swing.JTextField;
 
 
 public class Gui extends JFrame{
+	
+	JLabel messages;
+	JTextField inputMessage;
+	JButton sendMessage;
+	
+	
 	public Gui (){
 		setTitle("Chat");
 		setSize(200, 400);
 		
 		//START: Gui-Components
 		
-		JLabel messages = new JLabel("Keine Nachrichten verfügbar");
+		messages = new JLabel("Keine Nachrichten verfügbar");
 		
-		JTextField inputMessage = new JTextField();
+		inputMessage = new JTextField();
 		inputMessage.setColumns(15);
 		
-		JButton sendMessage = new JButton("Senden");
+		sendMessage = new JButton("Senden");
+		sendMessage.addActionListener(new ButtonListener());
 		
 		//END: Gui-Components
 		
@@ -37,4 +46,17 @@ public class Gui extends JFrame{
 		setResizable(false);
 		setVisible(true);
 	}
+
+	public class ButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == sendMessage){
+				System.out.println("You send a message!");
+			}
+			
+		}
+		
+	}
 }
+
