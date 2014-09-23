@@ -75,9 +75,11 @@ public class Gui extends JFrame {
 				String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
+				message = "<" + username + "> " + message;
+				
 				m.sendMessageToServer(message);
 				
-				messages.setText(messages.getText() + "<" + username + ">: " + message + "\n");
+				messages.setText(messages.getText() + message + "\n");
 			}
 		}
 		
