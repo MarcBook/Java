@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 public class Gui extends JFrame {
 	
-	JTextArea messages;
+	static JTextArea messages;
 	JTextField inputUser;
 	JTextField inputMessage;
 	JButton send;
@@ -23,6 +23,7 @@ public class Gui extends JFrame {
 	public static void getMessage (String message){
 		newMessage = message;
 		System.out.println(":" + newMessage);
+		messages.setText(messages.getText() + "\n" + message);
 	}
 	
 	public Gui (String ip, int port){
@@ -77,9 +78,11 @@ public class Gui extends JFrame {
 				
 				message = "<" + username + "> " + message;
 				
+				inputMessage.setText("");
+				
 				m.sendMessageToServer(message);
 				
-				messages.setText(messages.getText() + message + "\n");
+//				messages.setText(messages.getText() + message + "\n");
 			}
 		}
 		
