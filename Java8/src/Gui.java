@@ -24,7 +24,7 @@ public class Gui extends Application{
 		
 		primaryStage.setTitle("JavaFX");
 		
-		Image image = new Image("http://jgbtl14.bplaced.net/images/default.jpg");
+		Image image = new Image("http://bc01.rp-online.de/polopoly_fs/1.4087532.1394113726!httpImage/118577339.jpg_gen/derivatives/d950x950/118577339.jpg");
 		System.out.println(EditImage.getAverage(image));
 		
 		Circle circle = new Circle();
