@@ -1,4 +1,6 @@
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,8 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 
 public class Gui extends JFrame {
@@ -15,6 +20,9 @@ public class Gui extends JFrame {
 	static JTextArea messages;
 	JTextField inputUser;
 	JTextField inputMessage;
+	
+	JScrollPane scrollPane;
+	
 	JButton send;
 	Message m;
 	
@@ -38,9 +46,14 @@ public class Gui extends JFrame {
 		
 		//START: GUI-Components
 		
-		messages = new JTextArea();
+		messages = new JTextArea(15, 15);
 		messages.setEditable(false);
-		messages.setColumns(15);
+		messages.setLineWrap(true);
+		messages.setWrapStyleWord(true);
+//		messages.setPreferredSize(new Dimension(180, 280));
+		
+		scrollPane = new JScrollPane(messages);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		inputUser = new JTextField("User");
 		inputUser.setColumns(15);
@@ -56,7 +69,8 @@ public class Gui extends JFrame {
 		
 		//START: Adding Components to GUI 
 		
-		add(messages);
+//		add(messages);
+		add(scrollPane);
 		add(inputUser);
 		add(inputMessage);
 		add(send);
@@ -72,7 +86,7 @@ public class Gui extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == send){
+			if(e.getSource() == send && messages.getText() != ""){
 				String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
