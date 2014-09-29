@@ -4,6 +4,8 @@ import java.awt.ScrollPane;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -59,6 +61,7 @@ public class Gui extends JFrame {
 		
 		inputMessage = new JTextField();
 		inputMessage.setColumns(15);
+		inputMessage.addKeyListener(new KeyHandler());
 		
 		send = new JButton("Senden");
 		send.addActionListener(new ButtonHandler());
@@ -89,7 +92,7 @@ public class Gui extends JFrame {
 				String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
-				message = "<" + username + "> " + message;
+				message = username + ": " + message;
 				
 				inputMessage.setText("");
 				
@@ -97,6 +100,36 @@ public class Gui extends JFrame {
 				
 //				messages.setText(messages.getText() + message + "\n");
 			}
+		}
+		
+	}
+	
+	public class KeyHandler implements KeyListener {
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
+				String username = inputUser.getText();
+				String message = inputMessage.getText();
+				
+				message = username + ": " + message;
+				
+				inputMessage.setText("");
+				
+				m.sendMessageToServer(message);
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}
