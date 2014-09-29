@@ -50,7 +50,6 @@ public class Gui extends JFrame {
 		messages.setEditable(false);
 		messages.setLineWrap(true);
 		messages.setWrapStyleWord(true);
-//		messages.setPreferredSize(new Dimension(180, 280));
 		
 		scrollPane = new JScrollPane(messages);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
