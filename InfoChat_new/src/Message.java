@@ -51,7 +51,6 @@ public class Message {
 			
 			try{
 				while ((message = reader.readLine()) != null) {
-					System.out.println(message);
 					Gui.getMessage(message);
 				}
 			} catch (IOException e) {

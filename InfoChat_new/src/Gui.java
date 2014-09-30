@@ -26,13 +26,14 @@ public class Gui extends JFrame {
 	JScrollPane scrollPane;
 	
 	JButton send;
+	JButton clear;
+	
 	Message m;
 	
 	public static String newMessage;
 	
 	public static void getMessage (String message){
 		newMessage = message;
-		System.out.println(":" + newMessage);
 		messages.setText(messages.getText() + "\n" + message);
 	}
 	
@@ -66,6 +67,9 @@ public class Gui extends JFrame {
 		send = new JButton("Senden");
 		send.addActionListener(new ButtonHandler());
 		
+		clear = new JButton("Clear");
+		clear.addActionListener(new ButtonHandler());
+		
 		
 		//END: GUI-Components
 		
@@ -76,6 +80,7 @@ public class Gui extends JFrame {
 		add(inputUser);
 		add(inputMessage);
 		add(send);
+		add(clear);
 		
 		//END: Adding Components to GUI 
 		
@@ -88,7 +93,7 @@ public class Gui extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == send && messages.getText() != ""){
+			if(e.getSource() == send && inputMessage.getText().isEmpty() == false){
 				String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
@@ -100,6 +105,9 @@ public class Gui extends JFrame {
 				
 //				messages.setText(messages.getText() + message + "\n");
 			}
+			if(e.getSource() == clear){
+				messages.setText("");
+			}
 		}
 		
 	}
@@ -108,7 +116,7 @@ public class Gui extends JFrame {
 
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-			if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
+			if(arg0.getKeyCode() == KeyEvent.VK_ENTER && inputMessage.getText().isEmpty() == false){
 				String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
