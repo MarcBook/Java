@@ -13,6 +13,7 @@ public class OnStart extends JFrame {
 	
 	JTextField inputIp;
 	JTextField inputPort;
+	JTextField inputName;
 	JButton save;
 	
 	public OnStart (){
@@ -27,6 +28,9 @@ public class OnStart extends JFrame {
 		inputPort = new JTextField("5555");
 		inputPort.setColumns(15);
 		
+		inputName = new JTextField("Username");
+		inputName.setColumns(15);
+		
 		save = new JButton("Speichern");
 		save.addActionListener(new ButtonHandler());
 		
@@ -36,6 +40,7 @@ public class OnStart extends JFrame {
 		
 		add(inputIp);
 		add(inputPort);
+		add(inputName);
 		add(save);
 		
 		//END: Adding Components to GUI 
@@ -54,7 +59,7 @@ public class OnStart extends JFrame {
 				
 				setVisible(false);
 				
-				JFrame jf = new Gui(inputIp.getText(), port);
+				JFrame jf = new Gui(inputIp.getText(), port, inputName.getText());
 				//m.conntectToServer(inputIp.getText(), port);
 			}
 		}

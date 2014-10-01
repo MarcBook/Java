@@ -30,6 +30,8 @@ public class Gui extends JFrame {
 	
 	Message m;
 	
+	String username;
+	
 	public static String newMessage;
 	
 	public static void getMessage (String message){
@@ -37,10 +39,12 @@ public class Gui extends JFrame {
 		messages.setText(messages.getText() + "\n" + message);
 	}
 	
-	public Gui (String ip, int port){
+	public Gui (String ip, int port, String username){
 		
 		m = new Message();
 		m.conntectToServer(ip, port);
+		
+		this.username = username; 
 		
 		setTitle("Chat");
 		setSize(200, 400);
@@ -77,7 +81,7 @@ public class Gui extends JFrame {
 		
 //		add(messages);
 		add(scrollPane);
-		add(inputUser);
+//		add(inputUser);
 		add(inputMessage);
 		add(send);
 		add(clear);
@@ -94,7 +98,7 @@ public class Gui extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == send && inputMessage.getText().isEmpty() == false){
-				String username = inputUser.getText();
+				//String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
 				message = username + ": " + message;
@@ -117,7 +121,7 @@ public class Gui extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent arg0) {
 			if(arg0.getKeyCode() == KeyEvent.VK_ENTER && inputMessage.getText().isEmpty() == false){
-				String username = inputUser.getText();
+//				String username = inputUser.getText();
 				String message = inputMessage.getText();
 				
 				message = username + ": " + message;
