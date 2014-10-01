@@ -53,7 +53,7 @@ public class Gui extends JFrame {
 		
 		//START: GUI-Components
 		
-		messages = new JTextArea(15, 15);
+		messages = new JTextArea(18, 15);
 		messages.setEditable(false);
 		messages.setLineWrap(true);
 		messages.setWrapStyleWord(true);
