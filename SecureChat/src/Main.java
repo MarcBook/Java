@@ -7,13 +7,11 @@ import java.sql.SQLException;
 
 public class Main {
 	public static void main(String[] args) {
-		
-		System.out.println(Database.getNewMessages());
-		
+				
 		Crypt cr = new Crypt();
 		
 		try {
-			String m = cr.encryptMessage("Hallo", cr.getKeyPair().getPublic());
+			String m = cr.encryptMessage("sdfsjdf", cr.getKeyPair().getPublic());
 			System.out.println(m);
 			System.out.println(cr.decryptMessage(m, cr.getKeyPair().getPrivate()));
 		} catch (Exception e1) {
@@ -30,8 +28,10 @@ public class Main {
 	}
 	
 	public static void update() throws InterruptedException {
+				
 		while (true) {			
 			System.out.println("Update");
+			System.out.println(Database.getNewMessages());
 			Thread.sleep(1000);
 		}
 	}

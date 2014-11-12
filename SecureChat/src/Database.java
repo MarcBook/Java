@@ -1,10 +1,9 @@
+import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
 
 
 
@@ -47,5 +46,9 @@ public class Database {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void sendMessage(String acceptor, PublicKey acceptorKey, String message) {
+		
 	}
 }
