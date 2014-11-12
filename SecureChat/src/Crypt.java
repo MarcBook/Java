@@ -74,7 +74,7 @@ public class Crypt {
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.DECRYPT_MODE, key);
 		byte[] decrypted = cipher.doFinal(message.getBytes());
-		
+				
 		String decryptedMessage = new String(decrypted);
 		
 		return decryptedMessage;
