@@ -14,7 +14,7 @@ public class Database {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.2.117:3306/secureChat", "root", "Sicher12");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.2.117:3306/secureChat", "secureChat", "YHLRRjURGZX2hEM2");
 			PreparedStatement statement = conn.prepareStatement("SELECT * from " + db_acceptor_id);
 			ResultSet result = statement.executeQuery();
 			
@@ -32,7 +32,7 @@ public class Database {
 	
 	public static void sendMessage(String acceptor, PublicKey acceptorKey, String message) throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.2.117:3306/secureChat", "root", "Sicher12");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.2.117:3306/secureChat", "secureChat", "YHLRRjURGZX2hEM2");
 		Statement statement = conn.createStatement();
 		statement.executeUpdate("INSERT INTO `" + acceptor +"`(`message`, `date_time`) VALUES ('" + message +"', now())");
 	}
