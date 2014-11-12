@@ -5,20 +5,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
+import java.util.Base64;
 
 import javax.crypto.Cipher;
-import javax.crypto.CipherOutputStream;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 
 
 public class Crypt {
@@ -61,8 +56,27 @@ public class Crypt {
 		return new KeyPair(publicKey, privateKey);
 	}
 	
-	public static String encryptMessage(String message, PublicKey publicKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException {
+	public static String encryptMessage(String message, PublicKey publicKey) throws Exception {
+		Key key = publicKey;
 		
-		return null;
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.ENCRYPT_MODE, key);
+		byte[] encrypted = cipher.doFinal(message.getBytes());
+		
+		String encryptedMessage = new String(encrypted);
+		
+		return encryptedMessage;
+	}
+	
+	public static String decryptMessage(String message, PrivateKey privateKey) throws Exception {
+		Key key = privateKey;
+		
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.DECRYPT_MODE, key);
+		byte[] decrypted = cipher.doFinal(message.getBytes());
+		
+		String decryptedMessage = new String(decrypted);
+		
+		return decryptedMessage;
 	}
 }

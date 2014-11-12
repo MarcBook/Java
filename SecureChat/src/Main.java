@@ -13,14 +13,10 @@ public class Main {
 		Crypt cr = new Crypt();
 		
 		try {
-			cr.saveKeyPair();
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
+			String m = cr.encryptMessage("Hallo", cr.getKeyPair().getPublic());
+			System.out.println(m);
+			System.out.println(cr.decryptMessage(m, cr.getKeyPair().getPrivate()));
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
