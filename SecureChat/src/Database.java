@@ -10,7 +10,11 @@ import java.sql.Statement;
 
 public class Database {
 			
-	public static String getNewMessages(String db_acceptor_id) throws Exception {
+	public static byte[][] getNewMessages(String db_acceptor_id) throws Exception {
+		
+		Crypt cr = new Crypt();
+		byte[][] messages = null;
+		int counter = 0;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -19,21 +23,24 @@ public class Database {
 			ResultSet result = statement.executeQuery();
 			
 			while (result.next()) {
-				return result.getString(1);
-				
+				messages[counter] = result.getBytes(2);
+				counter++;
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return messages;
 	}
 	
-	public static void sendMessage(String acceptor, PublicKey acceptorKey, String message) throws Exception {
+	public static void sendMessage(String acceptor, PublicKey publicKey, String message) throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
+		Crypt cr = new Crypt();
+		byte[] encryptedMessage = cr.encrypt(message, publicKey);
+				
 		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.2.117:3306/secureChat", "secureChat", "YHLRRjURGZX2hEM2");
 		Statement statement = conn.createStatement();
-		statement.executeUpdate("INSERT INTO `" + acceptor +"`(`message`, `date_time`) VALUES ('" + message +"', now())");
+		statement.executeUpdate("INSERT INTO `" + acceptor +"`(`message`, `date_time`) VALUES ('" + encryptedMessage +"', now())");
 	}
 }

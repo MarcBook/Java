@@ -11,37 +11,30 @@ public class Main {
 		Crypt cr = new Crypt();
 		
 		try {
-//			Database.sendMessage("marcbook", cr.getKeyPair().getPublic(), "Hallo Welt");
+			Database.sendMessage("marcbook", cr.getKeyPair().getPublic(), "Hello World");
+			System.out.println(Database.getNewMessages("marcbook")[0]);
+			System.out.println(cr.decrypt(Database.getNewMessages("marcbook")[0], cr.getKeyPair().getPrivate()));	
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		
-		try {
-			String m = cr.encryptMessage("sdfsjdf", cr.getKeyPair().getPublic());
-			System.out.println(m);
-			System.out.println(cr.decryptMessage(m, cr.getKeyPair().getPrivate()));
-
-			Database.sendMessage("marcbook", cr.getKeyPair().getPublic(), "BlaBla");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+				
 		
 		try {
 			update();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
-	public static void update() throws InterruptedException {
-				
+	public static void update() throws Exception {
+		
 		while (true) {			
 			System.out.println("Update");
 			try {
-				System.out.println(Database.getNewMessages("marcbook"));
+				System.out.println(Database.getNewMessages("marcbook")[0]);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

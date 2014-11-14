@@ -1,26 +1,33 @@
+import java.awt.im.InputContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.KeyGenerator;
 
 
 public class Crypt {
 	
 	public KeyPair createKeyPair() throws NoSuchAlgorithmException {
 		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-		keyPairGenerator.initialize(512);
+		keyPairGenerator.initialize(2048);
 				
 		return keyPairGenerator.generateKeyPair();
 	}
@@ -54,9 +61,9 @@ public class Crypt {
 		PublicKey publicKey = (PublicKey) publicIS.readObject();
 		
 		return new KeyPair(publicKey, privateKey);
-	}
+	}	
 	
-	public static String encryptMessage(String message, PublicKey publicKey) throws Exception {
+	public String encryptMessage(String message, PublicKey publicKey) throws Exception {
 		Key key = publicKey;
 		
 		Cipher cipher = Cipher.getInstance("RSA");
@@ -68,7 +75,7 @@ public class Crypt {
 		return encryptedMessage;
 	}
 	
-	public static String decryptMessage(String message, PrivateKey privateKey) throws Exception {
+	public String decryptMessage(String message, PrivateKey privateKey) throws Exception {
 		Key key = privateKey;
 		
 		Cipher cipher = Cipher.getInstance("RSA");
@@ -78,5 +85,28 @@ public class Crypt {
 		String decryptedMessage = new String(decrypted);
 		
 		return decryptedMessage;
+	}
+	
+	
+	
+	
+	public byte[] encrypt(String message, PublicKey publicKey) throws Exception {
+		byte[] cipherText = null;
+		
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+		cipherText = cipher.doFinal(message.getBytes());
+		
+		return cipherText;
+	}
+	
+	public String decrypt(byte[] message, PrivateKey privateKey) throws Exception {
+		byte[] decryptedText = null;
+		
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		decryptedText = cipher.doFinal(message);
+		
+		return new String(decryptedText);
 	}
 }
