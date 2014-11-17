@@ -91,21 +91,19 @@ public class Crypt {
 	
 	
 	public byte[] encrypt(String message, PublicKey publicKey) throws Exception {
-		byte[] cipherText = null;
 		
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-		cipherText = cipher.doFinal(message.getBytes());
+		byte[] cipherText = cipher.doFinal(message.getBytes());
 		
 		return cipherText;
 	}
 	
 	public String decrypt(byte[] message, PrivateKey privateKey) throws Exception {
-		byte[] decryptedText = null;
 		
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
-		decryptedText = cipher.doFinal(message);
+		byte[] decryptedText = cipher.doFinal(message);
 		
 		return new String(decryptedText);
 	}

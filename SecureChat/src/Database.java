@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +13,10 @@ import java.sql.Statement;
 
 public class Database {
 			
-	public static byte[][] getNewMessages(String db_acceptor_id) throws Exception {
+	public static byte[] getNewMessages(String db_acceptor_id) throws Exception {
 		
 		Crypt cr = new Crypt();
-		byte[][] messages = null;
-		int counter = 0;
+		byte[] messages = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -23,8 +25,7 @@ public class Database {
 			ResultSet result = statement.executeQuery();
 			
 			while (result.next()) {
-				messages[counter] = result.getBytes(2);
-				counter++;
+				messages = result.getBytes(2);
 			}
 			
 		} catch (SQLException e) {
@@ -38,9 +39,19 @@ public class Database {
 		Class.forName("com.mysql.jdbc.Driver");
 		Crypt cr = new Crypt();
 		byte[] encryptedMessage = cr.encrypt(message, publicKey);
-				
+								
 		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.2.117:3306/secureChat", "secureChat", "YHLRRjURGZX2hEM2");
 		Statement statement = conn.createStatement();
 		statement.executeUpdate("INSERT INTO `" + acceptor +"`(`message`, `date_time`) VALUES ('" + encryptedMessage +"', now())");
+		
+	}
+	
+	public static void test() throws Exception {
+		Crypt cr = new Crypt();
+		byte[] b = cr.encrypt("HI", cr.getKeyPair().getPublic());
+		System.out.println(new String(b));
+		BigInteger s = new BigInteger(b);
+		System.out.println(s);
+		System.out.println(cr.decrypt(s.toByteArray(), cr.getKeyPair().getPrivate()));		
 	}
 }
